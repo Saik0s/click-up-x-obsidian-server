@@ -21,16 +21,44 @@
 </head>
 <body>
 <main class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-    <div class="text-center">
-        <p class="text-base font-semibold text-indigo-600">Welcome to Obsidian integrator </p>
-        <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Your code: <%= code %></h1>
-<!--        <p class="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t find the page you’re looking for.</p>-->
-        <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a href="#" class="text-sm font-semibold text-gray-900">Contact support <span aria-hidden="true">&rarr;</span></a>
-            <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open to obsidian</a>
+    <div class="text-center" style="margin-top: 10%; ">
+        <h1 class="mb-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">You have successfully authorized</h1>
+        <p class="text-2xl font-bold text-indigo-600">Please enter code below to plugin settings.</p>
+        <div id="success" class="flex justify-center" style="display: none">
+            <div class="bg-green-300 mt-5 w-1/2 rounded text-gray-600 py-1">Successfully copied</div>
+        </div>
+        <div class="flex mt-2 text-xl" >
+            <label for="code"></label>
+            <input id="code" type="text" value="<%= code %>" class="border px-4 py-1 rounded w-full" onclick="copyToClipboard()" />
+            <button class="border px-4 py-1 rounded bg-gray-100 hover:bg-gray-200" onclick="copyToClipboard()">copy</button>
+        </div>
 
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a href="https://dedicated.agency" class="text-sm font-semibold text-gray-900">Contact support <span aria-hidden="true">&rarr;</span></a>
+            <a href="obsidian://plugin?code=<%= code %>" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open obsidian</a>
         </div>
     </div>
 </main>
+<script>
+    var successMessage = document.getElementById("success");
+    function copyToClipboard() {
+        var inputElement = document.getElementById("code");
+
+        inputElement.select();
+
+        navigator.clipboard.writeText(inputElement.value)
+            .then(function() {
+                successMessage.style.display = 'flex';
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+
+    const interval = setInterval(function() {
+        successMessage.style.display = 'none';
+        console.log("Executing code every 3 seconds");
+    }, 5000);
+</script>
 </body>
 </html>
