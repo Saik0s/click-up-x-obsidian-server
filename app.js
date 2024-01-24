@@ -52,6 +52,13 @@ app.use('/proxy', (req, res) => {
   });
 
 })
+
+// not found response
+app.get("*",(req,res) => {
+  res.render('404');
+})
+
+
 // Start the server
 const port = 4010; // Set the desired port number
 app.listen(port, () => {
