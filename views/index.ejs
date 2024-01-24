@@ -27,7 +27,7 @@
         <div id="success" class="flex justify-center mb-5 relative " style="opacity: 0; transition: .4s">
             <div class="absolute bottom-0 bg-green-300 mt-5 w-1/2 rounded text-gray-600 py-1">Successfully copied</div>
         </div>
-        <div class="flex mt-2 text-2xl"  onclick="copyToClipboard()">
+        <div class="flex mt-2 text-2xl gap-2"  onclick="copyToClipboard()">
             <label for="code"></label>
             <input id="code" readonly type="text" value="<%= code %>" class="border px-4 py-1 rounded w-full" />
             <button class="border px-4 py-1 rounded bg-gray-100 hover:bg-gray-200">copy</button>
@@ -60,8 +60,8 @@
     }, 5000);
 
 
-    var referrer = document.referrer;
-    console.log("Referring URL: " + referrer);
+    // var referrer = document.referrer;
+    // console.log("Referring URL: " + referrer);
 
 
 </script>
