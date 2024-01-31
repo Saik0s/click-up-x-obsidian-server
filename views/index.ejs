@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to obsidian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<main class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+    <div class="text-center">
+        <h1 class="mb-6 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">You have successfully authorized</h1>
+        <p class="text-2xl font-bold text-indigo-600 mb-24">Please enter code below to plugin settings.</p>
+        <div id="success" class="flex justify-center mb-5 relative " style="opacity: 0; transition: .4s">
+            <div class="absolute bottom-0 bg-green-300 mt-5 w-1/2 rounded text-gray-600 py-1">Successfully copied</div>
+        </div>
+        <div class="flex mt-2 text-2xl gap-2"  onclick="copyToClipboard()">
+            <label for="code"></label>
+            <input id="code" readonly type="text" value="<%= code %>" class="border px-4 py-1 rounded w-full" />
+            <button class="border px-4 py-1 rounded bg-gray-100 hover:bg-gray-200">copy</button>
+        </div>
+
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a href="https://dedicated.agency" class="text-sm font-semibold text-gray-900">Contact support <span aria-hidden="true">&rarr;</span></a>
+            <a href="obsidian://plugin?code=<%= code %>" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Open obsidian</a>
+        </div>
+    </div>
+</main>
+<script>
+    var successMessage = document.getElementById("success");
+    function copyToClipboard() {
+        var inputElement = document.getElementById("code");
+
+        inputElement.select();
+
+        navigator.clipboard.writeText(inputElement.value)
+            .then(function() {
+                successMessage.style.opacity = '1';
+            })
+            .catch(function(error) {
+                console.error("Failed to copy text: ", error);
+            });
+    }
+
+    const interval = setInterval(function() {
+        successMessage.style.opacity = '0';
+    }, 5000);
+
+
+    // var referrer = document.referrer;
+    // console.log("Referring URL: " + referrer);
+
+
+</script>
+</body>
+</html>
