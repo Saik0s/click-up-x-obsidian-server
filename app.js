@@ -30,10 +30,9 @@ app.use('/proxy', (req, res) => {
     }
   };
   if (params && Object.keys(params).length > 0) options.qs = params
-  if (req.body && Object.keys(req.body).length > 0) options.body = req.body;
+  if (req.body && Object.keys(req.body).length > 0) options.body = JSON.stringify(req.body);
   if (token) options.headers['Authorization'] = token
 
-  console.log(options)
   request(options, function (error, response) {
     if (error) throw new Error(error);
     res.type('json')
